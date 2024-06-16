@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Long Adventure Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .output {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 20px;
+            min-height: 100px;
+            text-align: left;
+            overflow-y: scroll;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Long Adventure Game</h1>
+        <div class="output" id="output">
+            Welcome, adventurer! Are you ready to embark on a thrilling journey?
+        </div>
+        <button onclick="startGame()">Start Adventure</button>
+    </div>
+
+    <script>
+        const output = document.getElementById('output');
+        let playerName = '';
+
+        function startGame() {
+            playerName = prompt("Enter your name, adventurer:");
+            if (playerName === null || playerName.trim() === '') {
+                alert("Please enter a valid name.");
+                return;
+            }
+            output.innerHTML += `<p>Hello, ${playerName}! Welcome to the Long Adventure Game.</p>`;
+            setTimeout(intro, 1000); // Delayed intro for dramatic effect
+        }
+
+        function intro() {
+            output.innerHTML += `<p>You find yourself in the kingdom of Serendia, known for its mystical forests and ancient ruins.</p>`;
+            output.innerHTML += `<p>As you wander through the lush forests, you stumble upon a forked path...</p>`;
+            output.innerHTML += `<p>Which path will you take?</p>`;
+            showOptions(['Follow the path deeper into the forest', 'Investigate the ruins near the path', 'Head towards the distant mountains']);
+        }
+
+        function showOptions(options) {
+            let optionsHTML = '';
+            options.forEach((option, index) => {
+                optionsHTML += `<button onclick="selectOption(${index})">${option}</button>`;
+            });
+            output.innerHTML += optionsHTML;
+        }
+
+        function selectOption(index) {
+            switch (index) {
+                case 0:
+                    pathIntoForest();
+                    break;
+                case 1:
+                    investigateRuins();
+                    break;
+                case 2:
+                    headToMountains();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        function pathIntoForest() {
+            output.innerHTML += `<p>You decide to follow the path deeper into the forest.</p>`;
+            output.innerHTML += `<p>As you venture further, you hear rustling in the bushes...</p>`;
+            setTimeout(() => {
+                output.innerHTML += `<p>A wild creature emerges!</p>`;
+                showOptions(['Fight the creature', 'Attempt to flee']);
+            }, 1500);
+        }
+
+        function investigateRuins() {
+            output.innerHTML += `<p>You decide to investigate the ancient ruins.</p>`;
+            output.innerHTML += `<p>Inside the ruins, you discover...</p>`;
+            setTimeout(() => {
+                output.innerHTML += `<p>An ancient artifact!</p>`;
+                output.innerHTML += `<p>What will you do with the artifact?</p>`;
+                showOptions(['Keep it for yourself', 'Donate it to a museum']);
+            }, 1500);
+        }
+
+        function headToMountains() {
+            output.innerHTML += `<p>You start your journey towards the distant mountains.</p>`;
+            output.innerHTML += `<p>Along the way, you encounter...</p>`;
+            setTimeout(() => {
+                output.innerHTML += `<p>A group of travelers!</p>`;
+                output.innerHTML += `<p>They offer to join forces with you. Will you accept?</p>`;
+                showOptions(['Join forces', 'Continue alone']);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
